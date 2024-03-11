@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.18.3/dist/css/uikit.min.css" />
+    <link rel="stylesheet" href="css/main.css">
+    <title>TDA Score</title>
+</head>
+<body>
+
+    <nav class="uk-navbar-container">
+        <div class="uk-container-expand">
+            <div class="uk-navbar">
+                <div class="uk-navbar-left">
+                    <a class="uk-navbar-item uk-logo" href="#" aria-label="Home">TDA Score</a>
+                </div>
+                <div class="uk-navbar-right">
+                    <div id="toggle">
+                        <a class="uk-navbar-toggle" uk-navbar-toggle-icon href="#offcanvas-usage" uk-toggle ></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div id="offcanvas-usage" uk-offcanvas>
+        <div class="uk-offcanvas-bar">
+
+            <button class="uk-offcanvas-close" type="button" uk-close></button>
+
+            <div id="connectform">
+                <form>
+                    <div class="uk-margin">
+                        <div class="uk-inline">
+                            <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
+                            <input class="uk-input" type="password" aria-label="password" id="pass">
+                        </div>
+                    </div>
+                </form>
+                <div class="uk-margin">
+                    <button class="uk-button uk-button-default" id="sendBtn">Send</button>
+                </div>
+            </div>
+
+            <div id="gameMaster">
+                <div id="initGame">
+                    <button class="uk-button uk-button-default" id="partie4">4 joueurs</button>
+                    <button class="uk-button uk-button-default" id="partie5">5 joueurs</button>
+                </div>
+
+                <div id="scoreGame">
+                    <div class="form" id="partieForm">
+                        <div class="uk-margin">
+                            <select aria-label="Contrat" id="contrat" class="selection">
+                                <option value="-1">Contrat</option>
+                                <option value="1">Belge</option>
+                                <option value="2">Petite</option>
+                                <option value="3">Garde</option>
+                                <option value="4">G. Sans</option>
+                                <option value="5">G. Contre</option>
+                            </select>
+                        </div>
+                        <div class="uk-margin">
+                            <select aria-label="Preneur" id="preneur4" class="selection">
+                                <option value="-1">Preneur</option>
+                                <option value="2">Dan</option>
+                                <option value="3">Etienne</option>
+                                <option value="4">JP</option>
+                                <option value="1">Laurent</option>
+                            </select>
+                        </div>
+                        <div class="uk-margin">
+                            <select aria-label="Preneur" id="preneur5" class="selection">
+                                <option value="-1">Preneur</option>
+                                <option value="2">Dan</option>
+                                <option value="3">Etienne</option>
+                                <option value="5">Guest</option>
+                                <option value="4">JP</option>
+                                <option value="1">Laurent</option>
+                            </select>
+                        </div>
+                        <div class="uk-margin">
+                            <select aria-label="Preneur" id="appel" class="selection">
+                                <option value="-1">Appel</option>
+                                <option value="2">Dan</option>
+                                <option value="3">Etienne</option>
+                                <option value="5">Guest</option>
+                                <option value="5">JP</option>
+                                <option value="1">Laurent</option>
+                            </select>
+                        </div>
+                        <div class="uk-margin">
+                            <select aria-label="pab" id="bout" class="selection">
+                                <option value="0">Bouts</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                        </div>
+                        <div class="uk-margin">
+                            <form>
+                                <label for="attaque"></label><input type="number" name="amountInput" min="0" max="91" step="0.5" value="0" id="attaque"/>
+                                <label>Attaque</label>
+                            </form>
+                            <form>
+                                <label for="defense"></label><input type="number" name="amountInput" min="0" max="91" step="0.5" value="0" id="defense"/>
+                                <label>Défense</label>
+                            </form>
+                        </div>
+                        <div class="uk-margin">
+                            <select aria-label="pab" id="pab4" class="selection">
+                                <option value="-1">Petit au bout</option>
+                                <option value="2">Dan</option>
+                                <option value="3">Etienne</option>
+                                <option value="4">JP</option>
+                                <option value="1">Laurent</option>
+                            </select>
+                        </div>
+                        <div class="uk-margin">
+                            <select aria-label="pab" id="pab5" class="selection">
+                                <option value="-1">Petit au bout</option>
+                                <option value="2">Dan</option>
+                                <option value="3">Etienne</option>
+                                <option value="5">Guest</option>
+                                <option value="4">JP</option>
+                                <option value="1">Laurent</option>
+                            </select>
+                        </div>
+                        <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
+                            <label><input class="uk-checkbox" type="checkbox" id="chelem"> Chelem</label>
+                        </div>
+                        <button class="uk-button uk-button-default" id="valider">Valider</button>
+                    </div>
+
+                    <button class="uk-button uk-button-default" id="fin">Fin de réunion</button>
+                    <button class="uk-button uk-button-default" id="raz">RAZ</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <ul uk-tab>
+        <li><a href="#">Score</a></li>
+        <li><a href="#">Graph</a></li>
+    </ul>
+
+    <ul class="uk-switcher uk-margin">
+        <!--        ### Score ###-->
+        <li>
+            <div id="erreurSrv">
+                <p>La connexion avec le serveur est interrompue. Vueillez rafraîchir cette page ultérieurement.</p>
+            </div>
+
+            <div id="attente">
+                <p>En attente de création d'une partie.</p>
+            </div>
+
+            <div id="tableJoueurs">
+                <h3 id="titreReunion"></h3>
+                <table class="table table-striped" id="display">
+                    <thead>
+                    <tr>
+                        <th>Image</th>
+                        <th>Joueur</th>
+                        <th>Score</th>
+                        <th>Dette</th>
+                    </tr>
+                    </thead>
+                    <tbody id="joueursTab">
+                    </tbody>
+                </table>
+            </div>
+        </li>
+        <!--        ### Graphique ###-->
+        <li>
+            <div>
+                <canvas id="myChart"></canvas>
+            </div>
+
+        </li>
+    </ul>
+
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.18.3/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.18.3/dist/js/uikit-icons.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+</body>
+</html>
