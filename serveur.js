@@ -31,14 +31,14 @@ io.on('connection', (socket) => {
     });
 
     socket.on('start5', () => {
-        reunion.start5();
         console.log("🏁 partie 5 joueurs");
+        reunion.start5();
         io.emit("ping", reunion);
     });
 
     socket.on('fin', () => {
-        reunion.fin();
         console.log("🏁 fin de partie");
+        reunion.fin();
         io.emit("ping", reunion);
     });
 

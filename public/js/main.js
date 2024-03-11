@@ -24,6 +24,7 @@ const erreurSrv = document.getElementById("erreurSrv");
 const attente = document.getElementById("attente");
 const tableJoueurs = document.getElementById("tableJoueurs");
 const titreReunion = document.getElementById("titreReunion");
+const graphscore = document.getElementById("graphscore");
 const myChart = new Chart(document.getElementById('myChart').getContext('2d'), {type: 'line', data: {} });
 
 let isAuthtificated = false;
@@ -183,13 +184,18 @@ function renderPage() {
         }
     ]
 
-    if(nombreJoueurs !== 0){
-        if(nombreJoueurs === 4){
-            renderChart(labels,datasets4);
+    if(status >= 200){
+        if (nombreJoueurs === 4) {
+            renderChart(labels, datasets4);
         } else {
-            renderChart(labels,datasets5);
+            renderChart(labels, datasets5);
         }
+
+    } else {
+        renderChart([], []);
     }
+
+
 }
 
 function renderChart(labels, dataset) {

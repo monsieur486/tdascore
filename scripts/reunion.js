@@ -16,17 +16,18 @@ const gardeContre = new Contrat(5, "Garde contre", "GC", 200);
 const contrats = [belge, petite, garde, gardeSans, gardeContre];
 
 
+
 class Reunion {
     status = 100;
     nombreJoueurs = 0;
     parties = [];
     joueurs = [];
-    labels = [];
-    dataSetDan = [];
-    dataSetEtienne = [];
-    dataSetJp = [];
-    dataSetLaurent = [];
-    dataSetGuest = [];
+    labels = [0];
+    dataSetDan = [0];
+    dataSetEtienne = [0];
+    dataSetJp = [0];
+    dataSetLaurent = [0];
+    dataSetGuest = [0];
 
     constructor() {
         this.status = 100;
@@ -127,9 +128,22 @@ class Reunion {
         console.log("Chelem: " + chelemVal);
 
         console.log("Pab: " + pab);
-        let reussi = true;
-        let points = 10;
+        let reussi = verifReussi(parseInt(boutVal), parseInt(attaqueVal));
+        let points = verifDifference(parseInt(boutVal), parseInt(attaqueVal));
         console.log("Reussi: " + reussi);
+        console.log("Points: " + points);
+        calculPoints(
+            nombreJoueurs,
+            parseInt(contratVal),
+            parseInt(preneurVal),
+            parseInt(appelVal),
+            reussi,
+            points,
+            chelemVal,
+            parseInt(pabVal),
+            this.joueurs
+        );
+        createGraph(this.joueurs, nombrePartie, this.labels, this.dataSetDan, this.dataSetEtienne, this.dataSetJp, this.dataSetLaurent, this.dataSetGuest);
         let partie = new Partie(nombrePartie, contratVal, initiale, preneurVal, preneur, appelVal, appel, reussi, points, chelemVal, pabVal, pab);
         this.parties.push(partie);
         this.sortJoueursByPointsAndName();
@@ -145,5 +159,156 @@ class Reunion {
         });
     }
 }
+
+
+function verifReussi(bout, points) {
+    let result = false;
+    let minimum = 56;
+    if (bout === 1) {
+        minimum = 51;
+    } else if (bout === 2) {
+        minimum = 41;
+    } else if (bout === 3) {
+        minimum = 36;
+    }
+
+    let difference = points - minimum;
+    if (difference >= 0) {
+        result = true;
+    }
+
+    return result;
+
+}
+
+function verifDifference(bouts, points) {
+    let minimum = 56;
+    if (bouts === 1) {
+        minimum = 51;
+    } else if (bouts === 2) {
+        minimum = 41;
+    } else if (bouts === 3) {
+        minimum = 36;
+    }
+
+    let difference = points - minimum;
+    let surplus = Math.abs(difference);
+
+    let arrondi = 0;
+    if (surplus >= 5 && surplus < 14.5) {
+        arrondi = 10;
+    }
+    if (surplus >= 15 && surplus < 24.5) {
+        arrondi = 20;
+    }
+    if (surplus >= 25 && surplus < 34.5) {
+        arrondi = 30;
+    }
+    if (surplus >= 35 && surplus < 44.5) {
+        arrondi = 40;
+    }
+    if (surplus >= 45 && surplus < 54.5) {
+        arrondi = 50;
+    }
+
+    return arrondi;
+}
+
+function getContrat(contratId) {
+    return contrats.find(contrat => contrat.id === contratId);
+}
+
+function calculPoints(nombreDeJoueur, contratId, preneurId, appelId, reussi, points, chelem, pabId, joueurs){
+    function methode4joueurs(contratId, preneurId, reussi, points, chelem, pabId) {
+        let pointsTotal = getContrat(contratId).points + points;
+        if (!reussi) {
+            pointsTotal = -pointsTotal;
+        }
+        if(chelem){
+            pointsTotal = pointsTotal * 2;
+        }
+
+        for(let joueur of joueurs){
+            let actuel = joueur.points;
+            let variation = 0;
+            if(joueur.id === preneurId){
+                variation = pointsTotal * 3;
+            } else {
+                variation = -pointsTotal;
+            }
+            if(pabId !== -1){
+                if(joueur.id === pabId){
+                    variation += 30;
+                }else {
+                    variation -= 10;
+                }
+            }
+            joueur.setPoints(actuel + variation);
+        }
+    }
+
+    function methode5joueurs(contratId, preneurId, appelId, reussi, points, chelem, pabId, joueurs) {
+        let pointsTotal = getContrat(contratId).points + points;
+        if (!reussi) {
+            pointsTotal = -pointsTotal;
+        }
+        if(chelem){
+            pointsTotal = pointsTotal * 2;
+        }
+
+        for(let joueur of joueurs){
+            let actuel = joueur.points;
+            let variation = 0;
+            if(joueur.id === preneurId){
+                variation = pointsTotal * 2;
+            } else if(joueur.id === appelId){
+                variation = pointsTotal;
+            } else {
+                variation = -pointsTotal;
+            }
+            if(pabId !== -1){
+                if(joueur.id === pabId){
+                    variation += 40;
+                }else {
+                    variation -= 10;
+                }
+            }
+            joueur.setPoints(actuel + variation);
+        }
+    }
+
+    if(contratId > 1){
+        if (nombreDeJoueur === 4) {
+            methode4joueurs(contratId, preneurId, reussi, points, chelem, pabId);
+        } else {
+            methode5joueurs(contratId, preneurId, appelId, reussi, points, chelem, pabId);
+        }
+    }
+}
+
+function createGraph(joueurs, nombrePartie, labels, dataSetDan, dataSetEtienne, dataSetJp, dataSetLaurent, dataSetGuest) {
+    labels.push(nombrePartie);
+    for(const joueur of joueurs){
+        if(joueur.id === 1){
+            dataSetLaurent.push(joueur.points);
+        }
+        if(joueur.id === 2){
+            dataSetDan.push(joueur.points);
+        }
+        if(joueur.id === 3){
+            dataSetEtienne.push(joueur.points);
+        }
+        if(joueur.id === 4){
+            dataSetJp.push(joueur.points);
+        }
+        if(joueur.id === 5){
+            dataSetGuest.push(joueur.points);
+        }
+    }
+
+
+
+}
+
 
 module.exports = {Reunion};
