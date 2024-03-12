@@ -53,6 +53,15 @@ io.on('connection', (socket) => {
 
     socket.on('valider', (nombreJoueurs, contratVal, preneurVal, appelVal, boutVal, attaqueVal, chelemVal, pabVal) => {
         console.log("🛜 recpetion d'informations pour nouvelle partie");
+        console.log("===============================================");
+        console.log("Nombre de joueurs: " + nombreJoueurs);
+        console.log("Id du contrat: " + contratVal);
+        console.log("Id du preneur: " + preneurVal);
+        console.log("Id de l'appel: " + appelVal);
+        console.log("Nombre de bouts: " + boutVal);
+        console.log("Points du preneur: " + attaqueVal);
+        console.log("Chelem: " + chelemVal);
+        console.log("Id Petit au bout: " + pabVal);
         reunion.validerNouvellePartie(nombreJoueurs, contratVal, preneurVal, appelVal, boutVal, attaqueVal, chelemVal, pabVal);
         io.emit("ping", reunion);
     });
