@@ -105,20 +105,14 @@ class Reunion {
     }
 
     validerNouvellePartie(nombreJoueurs, contratVal, preneurVal, appelVal, boutVal, attaqueVal, chelemVal, pabVal) {
-        console.log("===============================================");
-        console.log("Validation nouvelle partie");
-        console.log("===============================================");
         let nombrePartie = this.getNombrePartie() + 1;
-        console.log("Numero de la partie: " + nombrePartie);
         let contrat = this.getContrat(parseInt(contratVal));
         let initiale = contrat.initiale;
-        console.log("Contrat: " + initiale);
         let preneur = "";
         if (parseInt(preneurVal) !== -1) {
             let joueur = this.getJoueur(parseInt(preneurVal));
             preneur = joueur.getImage();
         }
-        console.log("Preneur: " + preneur);
         let appel = "";
         if (parseInt(appelVal) === 0) {
             appelVal = -1;
@@ -131,19 +125,14 @@ class Reunion {
                 appel = "autogoal.jpg";
             }
         }
-        console.log("Appel: " + appel);
+        let reussi = verifReussi(parseInt(boutVal), parseInt(attaqueVal));
+        let points = verifDifference(parseInt(boutVal), parseInt(attaqueVal));
         let pab = "";
         if (parseInt(pabVal) !== -1) {
             let joueur = this.getJoueur(parseInt(pabVal));
             pab = joueur.getImage();
         }
-        console.log("Chelem: " + chelemVal);
 
-        console.log("Pab: " + pab);
-        let reussi = verifReussi(parseInt(boutVal), parseInt(attaqueVal));
-        let points = verifDifference(parseInt(boutVal), parseInt(attaqueVal));
-        console.log("Reussi: " + reussi);
-        console.log("Points: " + points);
         calculPoints(
             nombreJoueurs,
             parseInt(contratVal),
@@ -157,6 +146,21 @@ class Reunion {
         );
         createGraph(this.joueurs, nombrePartie, this.labels, this.dataSetDan, this.dataSetEtienne, this.dataSetJp, this.dataSetLaurent, this.dataSetGuest);
         let partie = new Partie(nombrePartie, contratVal, initiale, preneurVal, preneur, appelVal, appel, reussi, points, chelemVal, pabVal, pab);
+        console.log("👷 Traitement pour ajout nouvelle partie");
+        console.log("===============================================");
+        console.log("Numero de la partie: " + partie.numero);
+        console.log("Id du contrat: " + partie.idContrat);
+        console.log("Initiale du contrat: " + partie.initiale);
+        console.log("Chelem: " + partie.chelem);
+        console.log("Id du preneur: " + partie.idPreneur);
+        console.log("Image du preneur: " + partie.preneur);
+        console.log("Id de l'appel: " + partie.idAppel);
+        console.log("Image de l'appel: " + partie.appel);
+        console.log("Fait: " + partie.reussi);
+        console.log("Points: " + partie.points);
+        console.log("Id Petit au bout: " + partie.idPetitAuBout);
+        console.log("Image Petit au bout: " + partie.petitAuBout);
+        console.log("===============================================");
         this.parties.push(partie);
         this.sortJoueursByPointsAndName();
     }

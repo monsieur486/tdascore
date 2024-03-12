@@ -218,28 +218,24 @@ function sendPassword() {
 sendBtn.addEventListener("click", sendPassword);
 
 function startPartie4() {
-    console.log("Initialisation d'une partie à 4 joueurs");
     socket.emit("start4");
 }
 
 partie4.addEventListener("click", startPartie4);
 
 function startPartie5() {
-    console.log("Initialisation d'une partie à 5 joueurs");
     socket.emit("start5");
 }
 
 partie5.addEventListener("click", startPartie5);
 
 function finPartie() {
-    console.log("Fin de partie");
     socket.emit("fin");
 }
 
 fin.addEventListener("click", finPartie);
 
 function razPartie() {
-    console.log("RAZ !!!");
     socket.emit("raz");
 }
 
@@ -306,19 +302,9 @@ valider.addEventListener("click", validerPartie);
 
 socket.on("connect", (event) => {
     reinitialiseform();
-    console.log("Connecté au serveur avec id: " + socket.id);
+    console.log("️️️️🖥️ Connecté au serveur avec id: " + socket.id);
 
     socket.on("ping", (reunion) => {
-        console.log("Status:" + reunion.status);
-        console.log("Nmbre de joueurs:" + reunion.nombreJoueurs);
-        console.log(reunion.joueurs);
-        console.log(reunion.parties);
-        console.log(reunion.labels);
-        console.log(reunion.dataSetDan);
-        console.log(reunion.dataSetEtienne);
-        console.log(reunion.dataSetJp);
-        console.log(reunion.dataSetLaurent);
-        console.log(reunion.dataSetGuest);
         status = reunion.status;
         nombreJoueurs = reunion.nombreJoueurs;
         labels = reunion.labels;
@@ -327,11 +313,12 @@ socket.on("connect", (event) => {
         dataSetsJp = reunion.dataSetJp;
         dataSetsLaurent = reunion.dataSetLaurent;
         dataSetsGuest = reunion.dataSetGuest;
+        console.log("📡 Réception de données du serveur pour mise à jour de la page");
         renderPage();
     });
 
     socket.on('password', () => {
-        console.log("Authentifié avec succès !");
+        console.log("🔓 Authentifié avec succès !");
         isAuthtificated = true;
         renderPage();
     });

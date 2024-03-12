@@ -15,23 +15,23 @@ app.get('/', (req, res) => {
 });
 
 io.on('connection', (socket) => {
-    console.log('🔗 a user connected');
+    console.log("🔗 un nouvau client s'est connecté !");
     socket.emit("ping", reunion);
 
     socket.on('raz', () => {
-        console.log("🔥 RAZ partie");
+        console.log("🔥 RAZ partie !!!");
         reunion.raz();
         io.emit("ping", reunion);
     });
 
     socket.on('start4', () => {
-        console.log("🏁 partie 4 joueurs");
+        console.log("🏁 création d'une nouvelle partie à 4 joueurs");
         reunion.start4();
         io.emit("ping", reunion);
     });
 
     socket.on('start5', () => {
-        console.log("🏁 partie 5 joueurs");
+        console.log("🏁 création d'une nouvelle partie à 5 joueurs");
         reunion.start5();
         io.emit("ping", reunion);
     });
@@ -45,34 +45,24 @@ io.on('connection', (socket) => {
     socket.on('password', (password) => {
         if (password === gamePwd) {
             socket.emit("password");
-            console.log("Authentification accordée à " + socket.id)
+            console.log("🔓 Authentification accordée à " + socket.id)
         } else {
-            console.log("Authentification refusée à " + socket.id)
+            console.log("🔓 Authentification refusée à " + socket.id)
         }
     });
 
     socket.on('valider', (nombreJoueurs, contratVal, preneurVal, appelVal, boutVal, attaqueVal, chelemVal, pabVal) => {
-        console.log("===============================================");
-        console.log("Validation de la partie");
-        console.log("===============================================");
-        console.log("Nombre de joueurs: " + nombreJoueurs);
-        console.log("Contrat: " + contratVal);
-        console.log("Preneur: " + preneurVal);
-        console.log("Appel: " + appelVal);
-        console.log("Bout: " + boutVal);
-        console.log("Attaque: " + attaqueVal);
-        console.log("Chelem: " + chelemVal);
-        console.log("Pab: " + pabVal);
+        console.log("🛜 recpetion d'informations pour nouvelle partie");
         reunion.validerNouvellePartie(nombreJoueurs, contratVal, preneurVal, appelVal, boutVal, attaqueVal, chelemVal, pabVal);
         io.emit("ping", reunion);
     });
 
     socket.on('disconnect', () => {
-        console.log('🔥 user disconnected');
+        console.log("🔥 un utilisateur c'est déconnecté !");
     });
 });
 
 server.listen(3000, () => {
-    console.log('listening on *:3000');
+    console.log('🖥️ Serveur lancé en écoute sur le port *:3000');
 });
 
