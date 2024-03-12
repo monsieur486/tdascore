@@ -201,10 +201,7 @@ class Reunion {
         for (let partie of this.parties) {
             if(partie.idContrat > 1){
                 if(this.nombreJoueurs === 4){
-                    let message = partie.numero + ": " + partie.initiale + " - " + partie.preneur + " - " + partie.reussi + " " + partie.points + " point";
-                    if(partie.points>0){
-                        message += "s";
-                    }
+                    let message = partie.numero + ": " + partie.initiale + " - " + partie.preneur + " - " + partie.reussi + " " + partie.points;
                     if(partie.chelem){
                         message += " - Chelem !!!";
                     }
@@ -213,10 +210,7 @@ class Reunion {
                     }
                     console.log(message);
                 } else {
-                    let message = partie.numero + ": " + partie.initiale + " - " + partie.preneur + " - " + partie.appel + " - " + partie.reussi + " " + partie.points + " point";
-                    if(partie.points>0){
-                        message += "s";
-                    }
+                    let message = partie.numero + ": " + partie.initiale + " - " + partie.preneur + " - " + partie.appel + " - " + partie.reussi + " " + partie.points;
                     if(partie.chelem){
                         message += " - Chelem !!!";
                     }
