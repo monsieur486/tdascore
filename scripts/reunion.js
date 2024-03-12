@@ -263,7 +263,7 @@ function calculPoints(nombreDeJoueur, contratId, preneurId, appelId, reussi, poi
         }
     }
 
-    function methode5joueurs(contratId, preneurId, appelId, reussi, points, chelem, pabId, joueurs) {
+    function methode5joueurs(contratId, preneurId, appelId, reussi, points, chelem, pabId) {
         let pointsTotal = getContrat(contratId).points + points;
         if (!reussi) {
             pointsTotal = -pointsTotal;
