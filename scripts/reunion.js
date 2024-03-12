@@ -235,7 +235,9 @@ class Reunion {
         console.log("Etienne: " + this.dataSetEtienne);
         console.log("Jp: " + this.dataSetJp);
         console.log("Laurent: " + this.dataSetLaurent);
-        console.log("Guest: " + this.dataSetGuest);
+        if (this.nombreJoueurs === 5) {
+            console.log("Guest: " + this.dataSetGuest);
+        }
         console.log("===============================================");
         console.log("");
 

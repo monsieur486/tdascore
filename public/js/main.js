@@ -25,7 +25,7 @@ const attente = document.getElementById("attente");
 const tableJoueurs = document.getElementById("tableJoueurs");
 const titreReunion = document.getElementById("titreReunion");
 const graphscore = document.getElementById("graphscore");
-const myChart = new Chart(document.getElementById('myChart').getContext('2d'), {type: 'line', data: {} });
+const myChart = new Chart(document.getElementById('myChart').getContext('2d'), {type: 'line', data: {}});
 
 let isAuthtificated = false;
 let status = 0;
@@ -71,7 +71,7 @@ function renderPage() {
             scoreGame.style.display = 'inline';
         }
 
-        if(nombreJoueurs === 4){
+        if (nombreJoueurs === 4) {
             preneur4.style.display = 'inline';
             preneur5.style.display = 'none';
             appel.style.display = 'none';
@@ -116,7 +116,7 @@ function renderPage() {
         titreReunion.innerText = "Partie à " + nombreJoueurs + " joueurs";
     }
 
-    let datasets4= [
+    let datasets4 = [
         {
             label: 'Dan',
             data: dataSetsDan,
@@ -146,7 +146,7 @@ function renderPage() {
             tension: 0.1
         }
     ]
-    let datasets5= [
+    let datasets5 = [
         {
             label: 'Dan',
             data: dataSetsDan,
@@ -184,7 +184,7 @@ function renderPage() {
         }
     ]
 
-    if(status >= 200){
+    if (status >= 200) {
         if (nombreJoueurs === 4) {
             renderChart(labels, datasets4);
         } else {
@@ -277,7 +277,7 @@ function validerPartie() {
     let preneurVal = 0;
     let appelVal = 0;
     let pabVal = 0;
-    if(nombreJoueurs === 4){
+    if (nombreJoueurs === 4) {
         preneurVal = preneur4.value;
         pabVal = pab4.value;
         appelVal = -1;
@@ -291,7 +291,7 @@ function validerPartie() {
     let attaqueVal = attaque.value;
     let chelemVal = chelem.checked;
 
-    if(contrat.value >= 1){
+    if (contrat.value >= 1) {
         socket.emit("valider", nombreJoueurs, contratVal, preneurVal, appelVal, boutVal, attaqueVal, chelemVal, pabVal);
     }
 
