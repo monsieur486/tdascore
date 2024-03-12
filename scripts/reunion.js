@@ -80,6 +80,7 @@ class Reunion {
         this.joueurs = [laurent, dan, etienne, jp];
         this.initialiseDebut()
         this.sortJoueursByPointsAndName();
+        this.debugReunion();
     }
 
     start5() {
@@ -88,11 +89,13 @@ class Reunion {
         this.joueurs = [laurent, dan, etienne, jp, guest];
         this.initialiseDebut();
         this.sortJoueursByPointsAndName();
+        this.debugReunion();
     }
 
     fin() {
         this.status = 300;
         this.sortJoueursByPointsAndName();
+        this.debugReunion();
     }
 
     initialiseDebut(){
@@ -163,6 +166,7 @@ class Reunion {
         console.log("===============================================");
         this.parties.push(partie);
         this.sortJoueursByPointsAndName();
+        this.debugReunion();
     }
 
     sortJoueursByPointsAndName() {
@@ -173,6 +177,56 @@ class Reunion {
                 return a.points - b.points;
             }
         });
+    }
+
+    debugReunion(){
+        console.log("🔍 Debug de la réunion");
+        console.log("===============================================");
+        console.log("Status: " + this.status);
+        console.log("Nombre de joueurs: " + this.nombreJoueurs);
+        console.log("Nombre de parties: " + this.getNombrePartie());
+        console.log("===============================================");
+        console.log("Joueurs: ");
+        for (let joueur of this.joueurs) {
+            if(this.status === 300){
+                console.log(joueur.nom + ": " + joueur.points + " points - " + joueur.dette);
+            } else {
+                console.log(joueur.nom + ": " + joueur.points+ " points");
+            }
+        }
+        console.log("===============================================");
+        console.log("Parties: ");
+        for (let partie of this.parties) {
+            if(partie.idContrat > 1){
+                if(this.nombreJoueurs === 4){
+                    let message = partie.numero + ": " + partie.initiale + " - " + partie.preneur + " - " + partie.reussi + " " + partie.points + " point";
+                    if(partie.points>0){
+                        message += "s";
+                    }
+                    if(partie.chelem){
+                        message += " - Chelem !!!";
+                    }
+                    if (partie.idPetitAuBout >0) {
+                        message += " Petit au bout: " + partie.petitAuBout;
+                    }
+                    console.log(message);
+                } else {
+                    let message = partie.numero + ": " + partie.initiale + " - " + partie.preneur + " - " + partie.appel + " - " + partie.reussi + " " + partie.points + " point";
+                    if(partie.points>0){
+                        message += "s";
+                    }
+                    if(partie.chelem){
+                        message += " - Chelem !!!";
+                    }
+                    if (partie.idPetitAuBout >0) {
+                        message += " Petit au bout: " + partie.petitAuBout;
+                    }
+                    console.log(message);
+                }
+            } else {
+                console.log(partie.numero + ": Belge");
+            }
+        }
     }
 }
 
