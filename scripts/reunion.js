@@ -180,6 +180,8 @@ class Reunion {
     }
 
     debugReunion(){
+        console.log("");
+        console.log("===============================================");
         console.log("🔍 Debug de la réunion");
         console.log("===============================================");
         console.log("Status: " + this.status);
@@ -227,6 +229,16 @@ class Reunion {
                 console.log(partie.numero + ": Belge");
             }
         }
+        console.log("===============================================");
+        console.log("Historique: ");
+        console.log("Dan: " + this.dataSetDan);
+        console.log("Etienne: " + this.dataSetEtienne);
+        console.log("Jp: " + this.dataSetJp);
+        console.log("Laurent: " + this.dataSetLaurent);
+        console.log("Guest: " + this.dataSetGuest);
+        console.log("===============================================");
+        console.log("");
+
     }
 }
 
