@@ -24,6 +24,48 @@
         </div>
     </nav>
 
+    <div class="uk-container-expand" id="pagePrincipale">
+        <ul uk-tab class="uk-margin">
+            <li><a href="#">Score</a></li>
+            <li><a href="#">Graph</a></li>
+            <li><a href="#">Parties</a></li>
+        </ul>
+
+        <ul class="uk-switcher uk-margin">
+            <!--        ### Score ###-->
+            <li>
+                <div id="erreurSrv" class="uk-margin">
+                    <p>La connexion avec le serveur est interrompue. Vueillez rafraîchir cette page ultérieurement.</p>
+                </div>
+
+                <div id="attente" class="uk-margin">
+                    <p>En attente de création d'une partie.</p>
+                </div>
+
+                <div id="tableJoueurs" class="uk-margin">
+                    <h3 id="titreReunion"></h3>
+                    <table class="table table-striped" id="display">
+                        <tbody id="joueursTab">
+                        </tbody>
+                    </table>
+                </div>
+            </li>
+            <!--        ### Graphique ###-->
+            <li>
+                <div class="chart-container" style="position: relative; height:80vh; " id="graphscore">
+                    <canvas id="myChart"></canvas>
+                </div>
+            </li>
+            <!--        ### Parties ###-->
+            <li>
+                <div>
+                    <h3>Tableau des Parties</h3>
+                    <ul id="tableauParties"></ul>
+                </div>
+            </li>
+        </ul>
+    </div>
+
     <div id="offcanvas-usage" uk-offcanvas>
         <div class="uk-offcanvas-bar">
 
@@ -139,46 +181,6 @@
             </div>
         </div>
     </div>
-
-    <ul uk-tab>
-        <li><a href="#">Score</a></li>
-        <li><a href="#">Graph</a></li>
-        <li><a href="#">Parties</a></li>
-    </ul>
-
-    <ul class="uk-switcher uk-margin">
-        <!--        ### Score ###-->
-        <li>
-            <div id="erreurSrv">
-                <p>La connexion avec le serveur est interrompue. Vueillez rafraîchir cette page ultérieurement.</p>
-            </div>
-
-            <div id="attente">
-                <p>En attente de création d'une partie.</p>
-            </div>
-
-            <div id="tableJoueurs">
-                <h3 id="titreReunion"></h3>
-                <table class="table table-striped" id="display">
-                    <tbody id="joueursTab">
-                    </tbody>
-                </table>
-            </div>
-        </li>
-        <!--        ### Graphique ###-->
-        <li>
-            <div class="chart-container" style="position: relative; height:80vh; " id="graphscore">
-                <canvas id="myChart"></canvas>
-            </div>
-        </li>
-        <!--        ### Parties ###-->
-        <li>
-            <div>
-                <h3>Tableau des Parties</h3>
-                <ul id="tableauParties"></ul>
-            </div>
-        </li>
-    </ul>
 
     <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.18.3/dist/js/uikit.min.js"></script>
