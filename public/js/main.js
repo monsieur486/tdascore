@@ -208,6 +208,9 @@ function renderPage() {
         let tdDette = document.createElement('td');
         tdNom.innerText = joueurs[i].nom;
         tdPoints.innerText = joueurs[i].points;
+        if(joueurs[i].points<0) {
+            tdPoints.classList.add('text-danger');
+        }
         tdDette.innerText = joueurs[i].dette;
         tr.appendChild(tdNom);
         tr.appendChild(tdPoints);
