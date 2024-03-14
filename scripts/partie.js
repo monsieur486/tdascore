@@ -5,23 +5,28 @@ class Partie {
     initiale = "";
     idPreneur = -1;
     preneur = "";
+    preneurImage = "";
     idAppel = -1;
     appel = "";
+    appelImage = "";
     reussi = "";
     points = 0;
     chelemReussite = false;
     chelem = "";
     idPetitAuBout = -1;
     petitAuBout = "";
+    petitAuBoutImage = "";
 
-    constructor(numero, idContrat, initiale, idPreneur, preneur, idAppel, appel, reussi, points, chelem, idPetitAuBout, petitAuBout) {
+    constructor(numero, idContrat, initiale, idPreneur, preneur, preneurImage, idAppel, appel, appelImage, reussi, points, chelem, idPetitAuBout, petitAuBout, petitAuBoutImage) {
         this.numero = numero;
         this.idContrat = idContrat;
         this.initiale = initiale;
         this.idPreneur = idPreneur;
         this.preneur = preneur;
+        this.preneurImage = preneurImage;
         this.idAppel = idAppel;
         this.appel = appel;
+        this.appelImage = appelImage;
         this.reussi = "❌";
         if (reussi) {
             this.reussi = "✅";
@@ -36,6 +41,7 @@ class Partie {
         this.petitAuBout = "";
         if (idPetitAuBout >= 1) {
             this.petitAuBout = petitAuBout;
+            this.petitAuBoutImage = petitAuBoutImage;
         }
     }
 

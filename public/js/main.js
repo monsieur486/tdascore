@@ -30,6 +30,8 @@ const myChart = new Chart(document.getElementById('myChart').getContext('2d'), {
 let isAuthtificated = false;
 let status = 0;
 let nombreJoueurs = 0;
+let parties = [];
+let joueurs = [];
 let attaquePts = 91;
 let defensePts = 0;
 let labels = [];
@@ -195,6 +197,8 @@ function renderPage() {
         renderChart([], []);
     }
 
+    console.log("🖥️ Mise à jour de la page terminée");
+
 
 }
 
@@ -307,6 +311,8 @@ socket.on("connect", (event) => {
     socket.on("ping", (reunion) => {
         status = reunion.status;
         nombreJoueurs = reunion.nombreJoueurs;
+        joueurs = reunion.joueurs;
+        parties = reunion.parties;
         labels = reunion.labels;
         dataSetsDan = reunion.dataSetDan;
         dataSetsEtienne = reunion.dataSetEtienne;
@@ -314,6 +320,24 @@ socket.on("connect", (event) => {
         dataSetsLaurent = reunion.dataSetLaurent;
         dataSetsGuest = reunion.dataSetGuest;
         console.log("📡 Réception de données du serveur pour mise à jour de la page");
+        console.log("📡 Statut de la réunion: " + status);
+        console.log("📡 Nombre de joueurs: " + nombreJoueurs);
+        console.log("📡 * Joueurs *");
+        joueurs.forEach(joueur => {
+            console.log("📡 Joueur: " + joueur.nom + " - " + joueur.points + " - " + joueur.dette);
+        });
+        console.log("📡 * Parties *");
+        parties.forEach(partie => {
+            console.log("📡 Partie: " + partie.numero + " - " + partie.initiale);
+        });
+        console.log("📡 Labels: " + labels);
+        console.log("📡 DataSetsDan: " + dataSetsDan);
+        console.log("📡 DataSetsEtienne: " + dataSetsEtienne);
+        console.log("📡 DataSetsJp: " + dataSetsJp);
+        console.log("📡 DataSetsLaurent: " + dataSetsLaurent);
+        console.log("📡 DataSetsGuest: " + dataSetsGuest);
+        console.log("📡 Mise à jour de la page en cours...");
+
         renderPage();
     });
 

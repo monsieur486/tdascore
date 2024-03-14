@@ -112,28 +112,35 @@ class Reunion {
         let contrat = this.getContrat(parseInt(contratVal));
         let initiale = contrat.initiale;
         let preneur = "";
+        let preneurImage = "";
         if (parseInt(preneurVal) !== -1) {
             let joueur = this.getJoueur(parseInt(preneurVal));
-            preneur = joueur.getImage();
+            preneur = joueur.nom;
+            preneurImage = joueur.getImage();
         }
         let appel = "";
+        let appelImage = "";
         if (parseInt(appelVal) === 0) {
             appelVal = -1;
         }
         if (parseInt(appelVal) !== -1) {
             let joueur = this.getJoueur(parseInt(appelVal));
             if (preneurVal !== appelVal) {
-                appel = joueur.getImage();
+                appel = joueur.nom;
+                appelImage = joueur.getImage();
             } else {
-                appel = "autogoal.jpg";
+                appel = "Autogoal !!!";
+                appelImage = "autogoal.jpg";
             }
         }
         let reussi = verifReussi(parseInt(boutVal), parseInt(attaqueVal));
         let points = verifDifference(parseInt(boutVal), parseInt(attaqueVal));
         let pab = "";
+        let pabImage = "";
         if (parseInt(pabVal) !== -1) {
             let joueur = this.getJoueur(parseInt(pabVal));
-            pab = joueur.getImage();
+            pab = joueur.nom;
+            pabImage = joueur.getImage();
         }
 
         calculPoints(
@@ -148,7 +155,7 @@ class Reunion {
             this.joueurs
         );
         createGraph(this.joueurs, nombrePartie, this.labels, this.dataSetDan, this.dataSetEtienne, this.dataSetJp, this.dataSetLaurent, this.dataSetGuest);
-        let partie = new Partie(nombrePartie, contratVal, initiale, preneurVal, preneur, appelVal, appel, reussi, points, chelemVal, pabVal, pab);
+        let partie = new Partie(nombrePartie, contratVal, initiale, preneurVal, preneur, preneurImage ,appelVal, appel, appelImage, reussi, points, chelemVal, pabVal, pab, pabImage);
         console.log("👷 Traitement pour ajout nouvelle partie");
         console.log("===============================================");
         console.log("Numero de la partie: " + partie.numero);
@@ -156,13 +163,16 @@ class Reunion {
         console.log("Initiale du contrat: " + partie.initiale);
         console.log("Chelem: " + partie.chelem);
         console.log("Id du preneur: " + partie.idPreneur);
-        console.log("Image du preneur: " + partie.preneur);
+        console.log("Preneur: " + partie.preneur);
+        console.log("Image du preneur: " + partie.preneurImage);
         console.log("Id de l'appel: " + partie.idAppel);
-        console.log("Image de l'appel: " + partie.appel);
+        console.log("IAppel: " + partie.appel);
+        console.log("Image de l'appel: " + partie.appelImage);
         console.log("Fait: " + partie.reussi);
         console.log("Points: " + partie.points);
         console.log("Id Petit au bout: " + partie.idPetitAuBout);
-        console.log("Image Petit au bout: " + partie.petitAuBout);
+        console.log("Petit au bout: " + partie.petitAuBout);
+        console.log("Image Petit au bout: " + partie.petitAuBoutImage);
         console.log("===============================================");
         this.parties.push(partie);
         this.sortJoueursByPointsAndName();
@@ -201,7 +211,7 @@ class Reunion {
         for (let partie of this.parties) {
             if(partie.idContrat > 1){
                 if(this.nombreJoueurs === 4){
-                    let message = partie.numero + ": " + partie.initiale + " - " + partie.preneur + " - " + partie.reussi + " " + partie.points;
+                    let message = partie.numero + ": " + partie.initiale + " " + partie.preneur + " " + partie.reussi + " " + partie.points;
                     if(partie.chelem){
                         message += " - Chelem !!!";
                     }
@@ -210,7 +220,7 @@ class Reunion {
                     }
                     console.log(message);
                 } else {
-                    let message = partie.numero + ": " + partie.initiale + " - " + partie.preneur + " - " + partie.appel + " - " + partie.reussi + " " + partie.points;
+                    let message = partie.numero + ": " + partie.initiale + " " + partie.preneur + "-" + partie.appel + " " + partie.reussi + " " + partie.points;
                     if(partie.chelem){
                         message += " - Chelem !!!";
                     }
@@ -334,16 +344,31 @@ function calculPoints(nombreDeJoueur, contratId, preneurId, appelId, reussi, poi
             pointsTotal = pointsTotal * 2;
         }
 
+        let autogoal = false;
+        if(preneurId === appelId){
+            autogoal = true;
+        }
+
         for(let joueur of joueurs){
             let actuel = joueur.points;
             let variation = 0;
+
             if(joueur.id === preneurId){
-                variation = pointsTotal * 2;
+                if(autogoal){
+                    variation = pointsTotal * 4;
+                } else {
+                    variation = pointsTotal * 2;
+                }
             } else if(joueur.id === appelId){
-                variation = pointsTotal;
+                if(autogoal){
+                    variation = pointsTotal * 4;
+                } else {
+                    variation = pointsTotal;
+                }
             } else {
                 variation = -pointsTotal;
             }
+
             if(pabId !== -1){
                 if(joueur.id === pabId){
                     variation += 40;
