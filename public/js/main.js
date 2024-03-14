@@ -207,18 +207,20 @@ function renderPage() {
         let tdPoints = document.createElement('td');
         let tdDette = document.createElement('td');
         tdNom.innerText = joueurs[i].nom;
+        tdPoints.classList.add('uk-text-right');
         tdPoints.innerText = joueurs[i].points;
         if(joueurs[i].points<0) {
-            tdPoints.classList.add('text-danger');
+            tdPoints.classList.add('uk-text-danger');
         }
-        tdDette.innerText = joueurs[i].dette;
+        tdDette.classList.add('uk-text-right');
+        if(status === 300) {
+            tdDette.innerText = joueurs[i].dette;
+        } else {
+            tdDette.innerText = "-.- €";
+        }
         tr.appendChild(tdNom);
         tr.appendChild(tdPoints);
-        if(status === 300) {
-            tr.appendChild(tdDette);
-        } else {
-            tdDette.style.display = 'x';
-        }
+        tr.appendChild(tdDette);
         joueursTab.appendChild(tr);
     }
 
