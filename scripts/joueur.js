@@ -18,7 +18,7 @@ class Joueur {
     setPoints(points) {
         this.points = points;
         if (this.estGuest) {
-            this.dette = "0.00 €";
+            this.dette = "";
         } else {
             if (points < -10) {
                 this.dette = (2 + (-points / 300)).toFixed(1) + "0 €";
