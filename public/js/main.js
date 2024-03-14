@@ -1,4 +1,5 @@
 const socket = io();
+
 const connectform = document.getElementById("connectform");
 const password = document.getElementById("pass");
 const gameMaster = document.getElementById("gameMaster");
@@ -22,10 +23,11 @@ const raz = document.getElementById("raz");
 const fin = document.getElementById("fin");
 const erreurSrv = document.getElementById("erreurSrv");
 const attente = document.getElementById("attente");
-const tableJoueurs = document.getElementById("tableJoueurs");
+const joueursTab = document.getElementById("joueursTab");
 const titreReunion = document.getElementById("titreReunion");
 const graphscore = document.getElementById("graphscore");
 const myChart = new Chart(document.getElementById('myChart').getContext('2d'), {type: 'line', data: {}});
+const tableauParties = document.getElementById("tableauParties");
 
 let isAuthtificated = false;
 let status = 0;
@@ -195,6 +197,62 @@ function renderPage() {
 
     } else {
         renderChart([], []);
+    }
+
+    // render score
+    joueursTab.innerHTML = "";
+    for (i = 0; i < joueurs.length; ++i) {
+        let tr = document.createElement('tr');
+        let tdNom = document.createElement('td');
+        let tdPoints = document.createElement('td');
+        let tdDette = document.createElement('td');
+        tdNom.innerText = joueurs[i].nom;
+        tdPoints.innerText = joueurs[i].points;
+        tdDette.innerText = joueurs[i].dette;
+        tr.appendChild(tdNom);
+        tr.appendChild(tdPoints);
+        if(status === 300) {
+            tr.appendChild(tdDette);
+        } else {
+            tdDette.style.display = 'x';
+        }
+        joueursTab.appendChild(tr);
+    }
+
+
+    // rednder table
+    tableauParties.innerHTML = "";
+    for (i = 0; i < parties.length; ++i) {
+        let li = document.createElement('li');
+        let messagePartie = "";
+        messagePartie = li.innerText = parties[i].numero + " ";
+        if(parties[i].idContrat > 1) {
+            messagePartie += parties[i].initiale
+                + " "
+                + parties[i].preneur;
+
+                if(nombreJoueurs === 5) {
+                    messagePartie += "-"
+                        + parties[i].appel;
+                }
+            messagePartie +=" "
+                + parties[i].reussi
+                + " "
+                + parties[i].points;
+            if(parties[i].chelemReussite === true) {
+                messagePartie += " " + parties[i].chelem;
+            }
+            if(parties[i].idPetitAuBout >= 1) {
+                messagePartie += " 1️⃣: "
+                    + parties[i].petitAuBout;
+            }
+        } else {
+            messagePartie += "🇧🇪 Belge";
+        }
+
+        li.innerText = messagePartie;
+
+        tableauParties.appendChild(li);
     }
 
     console.log("🖥️ Mise à jour de la page terminée");

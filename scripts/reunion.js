@@ -129,7 +129,7 @@ class Reunion {
                 appel = joueur.nom;
                 appelImage = joueur.getImage();
             } else {
-                appel = "Autogoal !!!";
+                appel = "⚽ !!! Autogoal !!!";
                 appelImage = "autogoal.jpg";
             }
         }
