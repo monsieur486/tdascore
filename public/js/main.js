@@ -48,6 +48,7 @@ let dataSetsGuest = [];
 
 function createImage(name, image) {
     let img = document.createElement('img');
+    img.classList.add('uk-border-circle');
     img.src = '/img/' + image;
     img.width = widthImage;
     img.height = heightImage;
