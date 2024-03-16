@@ -17,7 +17,6 @@ const gardeContre = new Contrat(5, "Garde contre", "GC", 200);
 const contrats = [belge, petite, garde, gardeSans, gardeContre];
 
 
-
 class Reunion {
     status = 100;
     nombreJoueurs = 0;
@@ -98,7 +97,7 @@ class Reunion {
         this.debugReunion();
     }
 
-    initialiseDebut(){
+    initialiseDebut() {
         this.labels = [0];
         this.dataSetDan = [0];
         this.dataSetEtienne = [0];
@@ -155,7 +154,7 @@ class Reunion {
             this.joueurs
         );
         createGraph(this.joueurs, nombrePartie, this.labels, this.dataSetDan, this.dataSetEtienne, this.dataSetJp, this.dataSetLaurent, this.dataSetGuest);
-        let partie = new Partie(nombrePartie, contratVal, initiale, preneurVal, preneur, preneurImage ,appelVal, appel, appelImage, reussi, points, chelemVal, pabVal, pab, pabImage);
+        let partie = new Partie(nombrePartie, contratVal, initiale, preneurVal, preneur, preneurImage, appelVal, appel, appelImage, reussi, points, chelemVal, pabVal, pab, pabImage);
         console.log("👷 Traitement pour ajout nouvelle partie");
         console.log("===============================================");
         console.log("Numero de la partie: " + partie.numero);
@@ -189,7 +188,7 @@ class Reunion {
         });
     }
 
-    debugReunion(){
+    debugReunion() {
         console.log("");
         console.log("===============================================");
         console.log("🔍 Debug de la réunion");
@@ -200,31 +199,31 @@ class Reunion {
         console.log("===============================================");
         console.log("Joueurs: ");
         for (let joueur of this.joueurs) {
-            if(this.status === 300){
+            if (this.status === 300) {
                 console.log(joueur.nom + ": " + joueur.points + " points - " + joueur.dette);
             } else {
-                console.log(joueur.nom + ": " + joueur.points+ " points");
+                console.log(joueur.nom + ": " + joueur.points + " points");
             }
         }
         console.log("===============================================");
         console.log("Parties: ");
         for (let partie of this.parties) {
-            if(partie.idContrat > 1){
-                if(this.nombreJoueurs === 4){
+            if (partie.idContrat > 1) {
+                if (this.nombreJoueurs === 4) {
                     let message = partie.numero + ": " + partie.initiale + " " + partie.preneur + " " + partie.reussi + " " + partie.points;
-                    if(partie.chelem){
+                    if (partie.chelem) {
                         message += " - Chelem !!!";
                     }
-                    if (partie.idPetitAuBout >0) {
+                    if (partie.idPetitAuBout > 0) {
                         message += " 1️⃣: " + partie.petitAuBout;
                     }
                     console.log(message);
                 } else {
                     let message = partie.numero + ": " + partie.initiale + " " + partie.preneur + "-" + partie.appel + " " + partie.reussi + " " + partie.points;
-                    if(partie.chelem){
+                    if (partie.chelem) {
                         message += " - Chelem !!!";
                     }
-                    if (partie.idPetitAuBout >0) {
+                    if (partie.idPetitAuBout > 0) {
                         message += " 1️⃣: " + partie.petitAuBout;
                     }
                     console.log(message);
@@ -306,28 +305,28 @@ function getContrat(contratId) {
     return contrats.find(contrat => contrat.id === contratId);
 }
 
-function calculPoints(nombreDeJoueur, contratId, preneurId, appelId, reussi, points, chelem, pabId, joueurs){
+function calculPoints(nombreDeJoueur, contratId, preneurId, appelId, reussi, points, chelem, pabId, joueurs) {
     function methode4joueurs(contratId, preneurId, reussi, points, chelem, pabId) {
         let pointsTotal = getContrat(contratId).points + points;
         if (!reussi) {
             pointsTotal = -pointsTotal;
         }
-        if(chelem){
+        if (chelem) {
             pointsTotal = pointsTotal * 2;
         }
 
-        for(let joueur of joueurs){
+        for (let joueur of joueurs) {
             let actuel = joueur.points;
             let variation = 0;
-            if(joueur.id === preneurId){
+            if (joueur.id === preneurId) {
                 variation = pointsTotal * 3;
             } else {
                 variation = -pointsTotal;
             }
-            if(pabId !== -1){
-                if(joueur.id === pabId){
+            if (pabId !== -1) {
+                if (joueur.id === pabId) {
                     variation += 30;
-                }else {
+                } else {
                     variation -= 10;
                 }
             }
@@ -340,27 +339,27 @@ function calculPoints(nombreDeJoueur, contratId, preneurId, appelId, reussi, poi
         if (!reussi) {
             pointsTotal = -pointsTotal;
         }
-        if(chelem){
+        if (chelem) {
             pointsTotal = pointsTotal * 2;
         }
 
         let autogoal = false;
-        if(preneurId === appelId){
+        if (preneurId === appelId) {
             autogoal = true;
         }
 
-        for(let joueur of joueurs){
+        for (let joueur of joueurs) {
             let actuel = joueur.points;
             let variation = 0;
 
-            if(joueur.id === preneurId){
-                if(autogoal){
+            if (joueur.id === preneurId) {
+                if (autogoal) {
                     variation = pointsTotal * 4;
                 } else {
                     variation = pointsTotal * 2;
                 }
-            } else if(joueur.id === appelId){
-                if(autogoal){
+            } else if (joueur.id === appelId) {
+                if (autogoal) {
                     variation = pointsTotal * 4;
                 } else {
                     variation = pointsTotal;
@@ -369,10 +368,10 @@ function calculPoints(nombreDeJoueur, contratId, preneurId, appelId, reussi, poi
                 variation = -pointsTotal;
             }
 
-            if(pabId !== -1){
-                if(joueur.id === pabId){
+            if (pabId !== -1) {
+                if (joueur.id === pabId) {
                     variation += 40;
-                }else {
+                } else {
                     variation -= 10;
                 }
             }
@@ -380,7 +379,7 @@ function calculPoints(nombreDeJoueur, contratId, preneurId, appelId, reussi, poi
         }
     }
 
-    if(contratId > 1){
+    if (contratId > 1) {
         if (nombreDeJoueur === 4) {
             methode4joueurs(contratId, preneurId, reussi, points, chelem, pabId);
         } else {
@@ -391,20 +390,20 @@ function calculPoints(nombreDeJoueur, contratId, preneurId, appelId, reussi, poi
 
 function createGraph(joueurs, nombrePartie, labels, dataSetDan, dataSetEtienne, dataSetJp, dataSetLaurent, dataSetGuest) {
     labels.push(nombrePartie);
-    for(const joueur of joueurs){
-        if(joueur.id === 1){
+    for (const joueur of joueurs) {
+        if (joueur.id === 1) {
             dataSetLaurent.push(joueur.points);
         }
-        if(joueur.id === 2){
+        if (joueur.id === 2) {
             dataSetDan.push(joueur.points);
         }
-        if(joueur.id === 3){
+        if (joueur.id === 3) {
             dataSetEtienne.push(joueur.points);
         }
-        if(joueur.id === 4){
+        if (joueur.id === 4) {
             dataSetJp.push(joueur.points);
         }
-        if(joueur.id === 5){
+        if (joueur.id === 5) {
             dataSetGuest.push(joueur.points);
         }
     }

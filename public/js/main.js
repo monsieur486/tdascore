@@ -226,15 +226,12 @@ function renderPage() {
         tdImage.appendChild(nomText);
 
         tdPoints.classList.add('uk-text-right');
-        //tdPoints.classList.add('uk-width-small');
         tdPoints.innerText = joueurs[i].points;
         if(joueurs[i].points<0) {
             tdPoints.classList.add('uk-text-danger');
         }
 
         tdDette.classList.add('uk-text-right');
-        //tdDette.classList.add('uk-width-small');
-
         if(!joueurs[i].estGuest) {
             if(status === 300) {
                 tdDette.innerText = joueurs[i].dette;
