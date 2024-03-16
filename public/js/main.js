@@ -28,6 +28,10 @@ const titreReunion = document.getElementById("titreReunion");
 const graphscore = document.getElementById("graphscore");
 const myChart = new Chart(document.getElementById('myChart').getContext('2d'), {type: 'line', data: {}});
 const tableauParties = document.getElementById("tableauParties");
+const tableJoueurs = document.getElementById("tableJoueurs");
+
+const widthImage = 80;
+const heightImage = 80;
 
 let isAuthtificated = false;
 let status = 0;
@@ -42,6 +46,19 @@ let dataSetsEtienne = [];
 let dataSetsJp = [];
 let dataSetsLaurent = [];
 let dataSetsGuest = [];
+
+function createImage(name, image) {
+    let img = document.createElement('img');
+    //img.classList.add('uk-preserve-width');
+    img.classList.add('uk-border-circle');
+    img.src = '/img/' + image;
+    img.width = widthImage;
+    img.height = heightImage;
+    img.alt = name;
+
+    return img;
+
+}
 
 function renderPage() {
     attaque.value = attaquePts;
@@ -206,7 +223,8 @@ function renderPage() {
         let tdNom = document.createElement('td');
         let tdPoints = document.createElement('td');
         let tdDette = document.createElement('td');
-        tdNom.innerText = joueurs[i].nom;
+        tdNom.appendChild(createImage(joueurs[i].nom, joueurs[i].image));
+        //tdNom.innerText = joueurs[i].nom;
         tdPoints.classList.add('uk-text-right');
         tdPoints.innerText = joueurs[i].points;
         if(joueurs[i].points<0) {

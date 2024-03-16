@@ -2,11 +2,11 @@ const {Joueur} = require('./joueur');
 const {Contrat} = require('./contrat');
 const {Partie} = require('./partie');
 
-const laurent = new Joueur(1, "Laurent", "laurent.jpg", false, 'rgb(45,82,211)');
-const dan = new Joueur(2, "Dan", "dan.jpg", false, 'rgb(232,90,30)');
-const etienne = new Joueur(3, "Etienne", "etienne.jpg", false, 'rgb(160,21,212)');
-const jp = new Joueur(4, "Jp", "jp.jpg", false, 'rgb(77,232,35)');
-const guest = new Joueur(5, "Guest", "guest.jpg", true, 'rgb(93,173,183)');
+const laurent = new Joueur(1, "Laurent", "trombi_laurent.png", false, 'rgb(45,82,211)');
+const dan = new Joueur(2, "Dan", "trombi_dan.png", false, 'rgb(232,90,30)');
+const etienne = new Joueur(3, "Etienne", "trombi_etienne.png", false, 'rgb(160,21,212)');
+const jp = new Joueur(4, "Jp", "trombi_jp.png", false, 'rgb(77,232,35)');
+const guest = new Joueur(5, "Guest", "trombi_bernard.png", true, 'rgb(93,173,183)');
 const baseJoueurs = [laurent, dan, etienne, jp, guest];
 
 const belge = new Contrat(1, "Belge", "🇧🇪", 0);
@@ -216,7 +216,7 @@ class Reunion {
                         message += " - Chelem !!!";
                     }
                     if (partie.idPetitAuBout >0) {
-                        message += " Petit au bout: " + partie.petitAuBout;
+                        message += " 1️⃣: " + partie.petitAuBout;
                     }
                     console.log(message);
                 } else {
@@ -225,7 +225,7 @@ class Reunion {
                         message += " - Chelem !!!";
                     }
                     if (partie.idPetitAuBout >0) {
-                        message += " Petit au bout: " + partie.petitAuBout;
+                        message += " 1️⃣: " + partie.petitAuBout;
                     }
                     console.log(message);
                 }
