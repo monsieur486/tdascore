@@ -25,7 +25,6 @@ const erreurSrv = document.getElementById("erreurSrv");
 const attente = document.getElementById("attente");
 const joueursTab = document.getElementById("joueursTab");
 const titreReunion = document.getElementById("titreReunion");
-const graphscore = document.getElementById("graphscore");
 const myChart = new Chart(document.getElementById('myChart').getContext('2d'), {type: 'line', data: {}});
 const tableauParties = document.getElementById("tableauParties");
 const tableJoueurs = document.getElementById("tableJoueurs");
