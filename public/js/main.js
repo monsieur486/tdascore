@@ -48,15 +48,11 @@ let dataSetsGuest = [];
 
 function createImage(name, image) {
     let img = document.createElement('img');
-    //img.classList.add('uk-preserve-width');
-    img.classList.add('uk-border-circle');
     img.src = '/img/' + image;
     img.width = widthImage;
     img.height = heightImage;
     img.alt = name;
-
     return img;
-
 }
 
 function renderPage() {
@@ -220,20 +216,23 @@ function renderPage() {
     for (i = 0; i < joueurs.length; ++i) {
         let tr = document.createElement('tr');
         let tdImage = document.createElement('td');
-        let tdNom = document.createElement('td');
         let tdPoints = document.createElement('td');
         let tdDette = document.createElement('td');
 
-        tdImage.classList.add('uk-text-center');
-        tdImage.classList.add('uk-width-small');
         tdImage.appendChild(createImage(joueurs[i].nom, joueurs[i].image));
-        tdNom.innerText = joueurs[i].nom;
+        let nomText = document.createElement('span');
+        nomText.innerText = " " + joueurs[i].nom;
+        tdImage.appendChild(nomText);
+
         tdPoints.classList.add('uk-text-right');
+        tdPoints.classList.add('uk-width-small');
         tdPoints.innerText = joueurs[i].points;
         if(joueurs[i].points<0) {
             tdPoints.classList.add('uk-text-danger');
         }
+
         tdDette.classList.add('uk-text-right');
+        tdDette.classList.add('uk-width-small');
 
         if(!joueurs[i].estGuest) {
             if(status === 300) {
@@ -246,7 +245,6 @@ function renderPage() {
         }
 
         tr.appendChild(tdImage);
-        tr.appendChild(tdNom);
         tr.appendChild(tdPoints);
         tr.appendChild(tdDette);
         joueursTab.appendChild(tr);
