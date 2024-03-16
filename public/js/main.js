@@ -222,7 +222,7 @@ function renderPage() {
 
         tdImage.appendChild(createImage(joueurs[i].nom, joueurs[i].image));
         let nomText = document.createElement('span');
-        nomText.innerText = " " + joueurs[i].nom;
+        nomText.innerText = joueurs[i].nom;
         tdImage.appendChild(nomText);
 
         tdPoints.classList.add('uk-text-right');
