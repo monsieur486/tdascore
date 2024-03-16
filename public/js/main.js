@@ -220,22 +220,33 @@ function renderPage() {
     joueursTab.innerHTML = "";
     for (i = 0; i < joueurs.length; ++i) {
         let tr = document.createElement('tr');
+        let tdImage = document.createElement('td');
         let tdNom = document.createElement('td');
         let tdPoints = document.createElement('td');
         let tdDette = document.createElement('td');
-        tdNom.appendChild(createImage(joueurs[i].nom, joueurs[i].image));
-        //tdNom.innerText = joueurs[i].nom;
+
+        tdImage.classList.add('uk-text-center');
+        tdImage.classList.add('uk-width-small');
+        tdImage.appendChild(createImage(joueurs[i].nom, joueurs[i].image));
+        tdNom.innerText = joueurs[i].nom;
         tdPoints.classList.add('uk-text-right');
         tdPoints.innerText = joueurs[i].points;
         if(joueurs[i].points<0) {
             tdPoints.classList.add('uk-text-danger');
         }
         tdDette.classList.add('uk-text-right');
-        if(status === 300) {
-            tdDette.innerText = joueurs[i].dette;
+
+        if(!joueurs[i].estGuest) {
+            if(status === 300) {
+                tdDette.innerText = joueurs[i].dette;
+            } else {
+                tdDette.innerText = "-.- €";
+            }
         } else {
-            tdDette.innerText = "-.- €";
+            tdDette.innerText = "";
         }
+
+        tr.appendChild(tdImage);
         tr.appendChild(tdNom);
         tr.appendChild(tdPoints);
         tr.appendChild(tdDette);
