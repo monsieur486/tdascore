@@ -73,7 +73,6 @@ class Reunion {
         let gardeContreChutee = 0;
         let pab=0;
         for (let partie of this.parties) {
-            console.log(partie);
             if (parseInt(partie.idContrat) === 1) {
                 belge++;
             }
