@@ -25,6 +25,7 @@ const erreurSrv = document.getElementById("erreurSrv");
 const attente = document.getElementById("attente");
 const joueursTab = document.getElementById("joueursTab");
 const titreReunion = document.getElementById("titreReunion");
+const messagePartie = document.getElementById("messagePartie");
 const myChart = new Chart(document.getElementById('myChart').getContext('2d'), {type: 'line', data: {}});
 const tableauParties = document.getElementById("tableauParties");
 const tableJoueurs = document.getElementById("tableJoueurs");
@@ -34,6 +35,7 @@ const heightImage = 40;
 
 let isAuthtificated = false;
 let status = 0;
+let message = "";
 let nombreJoueurs = 0;
 let parties = [];
 let joueurs = [];
@@ -248,6 +250,8 @@ function renderPage() {
         joueursTab.appendChild(tr);
     }
 
+    messagePartie.innerText = message;
+
 
     // rednder table
     tableauParties.innerHTML = "";
@@ -398,6 +402,7 @@ socket.on("connect", (event) => {
     socket.on("ping", (reunion) => {
         status = reunion.status;
         nombreJoueurs = reunion.nombreJoueurs;
+        message = reunion.messageParties;
         joueurs = reunion.joueurs;
         parties = reunion.parties;
         labels = reunion.labels;

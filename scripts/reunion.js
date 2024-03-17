@@ -20,6 +20,7 @@ const contrats = [belge, petite, garde, gardeSans, gardeContre];
 class Reunion {
     status = 100;
     nombreJoueurs = 0;
+    messageParties = "";
     parties = [];
     joueurs = [];
     labels = [0];
@@ -32,6 +33,7 @@ class Reunion {
     constructor() {
         this.status = 100;
         this.nombreJoueurs = 0;
+        this.messageParties = "";
         this.parties = [];
         this.joueurs = [];
         this.labels = [];
@@ -56,6 +58,97 @@ class Reunion {
 
     getContrat(id) {
         return contrats.find(contrat => contrat.id === id);
+    }
+
+    getMessagesParties() {
+        let message = "";
+        let belge = 0;
+        let petiteReussie = 0;
+        let petiteChutee = 0;
+        let gardeReussie = 0;
+        let gardeChutee = 0;
+        let gardeSansReussie = 0;
+        let gardeSansChutee = 0;
+        let gardeContreReussie = 0;
+        let gardeContreChutee = 0;
+        let pab=0;
+        for (let partie of this.parties) {
+            console.log(partie);
+            if (parseInt(partie.idContrat) === 1) {
+                belge++;
+            }
+            if (parseInt(partie.idContrat) === 2) {
+                if (partie.reussi === "✅") {
+                    petiteReussie++;
+                } else {
+                    petiteChutee++;
+                }
+            }
+            if (parseInt(partie.idContrat) === 3) {
+                if (partie.reussi === "✅") {
+                    gardeReussie++;
+                } else {
+                    gardeChutee++;
+                }
+            }
+            if (parseInt(partie.idContrat) === 4) {
+                if (partie.reussi === "✅") {
+                    gardeSansReussie++;
+                } else {
+                    gardeSansChutee++;
+                }
+            }
+            if (parseInt(partie.idContrat) === 5) {
+                if (partie.reussi === "✅") {
+                    gardeContreReussie++;
+                } else {
+                    gardeContreChutee++;
+                }
+            }
+            if (parseInt(partie.idPetitAuBout) > 0) {
+                pab++;
+            }
+
+            message = "Nombre de parties: " + this.getNombrePartie() + " > ";
+
+            if(belge>0){
+                message += "🇧🇪: " + belge + " ";
+            }
+            if(petiteReussie + petiteChutee>0){
+                let total = petiteReussie + petiteChutee;
+                message += "P: " + total + " ";
+            }
+
+            if(gardeReussie + gardeChutee>0){
+                let total = gardeReussie + gardeChutee;
+                message += "G: " + total + " ";
+            }
+
+            if(gardeSansReussie + gardeSansChutee>0){
+                let total = gardeSansReussie + gardeSansChutee;
+                message += "GS: " + total + " ";
+            }
+
+            if(gardeContreReussie + gardeContreChutee>0){
+                let total = gardeContreReussie + gardeContreChutee;
+                message += "GC: " + total + " ";
+            }
+
+            let totalReussi = petiteReussie + gardeReussie + gardeSansReussie + gardeContreReussie;
+            let totalChutee = petiteChutee + gardeChutee + gardeSansChutee + gardeContreChutee;
+
+            let pourcentageReussi = totalReussi / (totalReussi + totalChutee) * 100;
+            let pourcentageChutee = 100- pourcentageReussi;
+
+            message += "- Réussite ✅: " + pourcentageReussi.toFixed(0) + "% ";
+            message += "❌: " + pourcentageChutee.toFixed(0) + "% ";
+
+            if(pab>0){
+                message += " PAB: " + pab + " ";
+            }
+
+        }
+        this.messageParties = message;
     }
 
     raz() {
@@ -175,6 +268,7 @@ class Reunion {
         console.log("===============================================");
         this.parties.push(partie);
         this.sortJoueursByPointsAndName();
+        this.getMessagesParties();
         this.debugReunion();
     }
 
@@ -232,6 +326,7 @@ class Reunion {
                 console.log(partie.numero + ": Belge");
             }
         }
+        console.log("Message partie: " + this.messageParties);
         console.log("===============================================");
         console.log("Historique: ");
         console.log("Dan: " + this.dataSetDan);
