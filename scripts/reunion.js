@@ -108,7 +108,7 @@ class Reunion {
                 pab++;
             }
 
-            message = "Parties: " + this.getNombrePartie() + " > ";
+            message = this.getNombrePartie() + " > ";
 
             if(belge>0){
                 message += belge + "🇧🇪 ";
