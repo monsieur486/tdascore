@@ -108,29 +108,29 @@ class Reunion {
                 pab++;
             }
 
-            message = "Nombre de parties: " + this.getNombrePartie() + " > ";
+            message = "Parties: " + this.getNombrePartie() + " > ";
 
             if(belge>0){
-                message += "🇧🇪: " + belge + " ";
+                message += belge + "🇧🇪 ";
             }
             if(petiteReussie + petiteChutee>0){
                 let total = petiteReussie + petiteChutee;
-                message += "P: " + total + " ";
+                message += total + "P ";
             }
 
             if(gardeReussie + gardeChutee>0){
                 let total = gardeReussie + gardeChutee;
-                message += "G: " + total + " ";
+                message += total + "G ";
             }
 
             if(gardeSansReussie + gardeSansChutee>0){
                 let total = gardeSansReussie + gardeSansChutee;
-                message += "GS: " + total + " ";
+                message += total + "GS ";
             }
 
             if(gardeContreReussie + gardeContreChutee>0){
                 let total = gardeContreReussie + gardeContreChutee;
-                message += "GC: " + total + " ";
+                message += total + "GC ";
             }
 
             let totalReussi = petiteReussie + gardeReussie + gardeSansReussie + gardeContreReussie;
@@ -139,7 +139,7 @@ class Reunion {
             let pourcentageReussi = totalReussi / (totalReussi + totalChutee) * 100;
             let pourcentageChutee = 100- pourcentageReussi;
 
-            message += "- Réussite ✅: " + pourcentageReussi.toFixed(0) + "% ";
+            message += "=> ✅: " + pourcentageReussi.toFixed(0) + "% ";
             message += "❌: " + pourcentageChutee.toFixed(0) + "% ";
 
             if(pab>0){
