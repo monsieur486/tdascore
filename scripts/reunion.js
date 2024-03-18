@@ -33,7 +33,7 @@ class Reunion {
     constructor() {
         this.status = 100;
         this.nombreJoueurs = 0;
-        this.messageParties = "En attente du resultat de la première partie...";
+        this.messageParties = "";
         this.parties = [];
         this.joueurs = [];
         this.labels = [];
