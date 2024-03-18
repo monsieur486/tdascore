@@ -153,7 +153,7 @@ class Reunion {
     raz() {
         this.status = 100;
         this.nombreJoueurs = 0;
-        this.messageParties = "En attente du resultat de la première partie...";
+        this.messageParties = "";
         this.parties.length = 0;
         this.joueurs.length = 0;
         this.labels.length = 0;
@@ -169,6 +169,7 @@ class Reunion {
     start4() {
         this.status = 200;
         this.nombreJoueurs = 4;
+        this.messageParties = "En attente du resultat de la première partie...";
         this.joueurs = [laurent, dan, etienne, jp];
         this.initialiseDebut()
         this.sortJoueursByPointsAndName();
@@ -178,6 +179,7 @@ class Reunion {
     start5() {
         this.status = 200;
         this.nombreJoueurs = 5;
+        this.messageParties = "En attente du resultat de la première partie...";
         this.joueurs = [laurent, dan, etienne, jp, guest];
         this.initialiseDebut();
         this.sortJoueursByPointsAndName();
