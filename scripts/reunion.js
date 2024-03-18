@@ -33,7 +33,7 @@ class Reunion {
     constructor() {
         this.status = 100;
         this.nombreJoueurs = 0;
-        this.messageParties = "";
+        this.messageParties = "En attente du resultat de la première partie...";
         this.parties = [];
         this.joueurs = [];
         this.labels = [];
@@ -153,6 +153,7 @@ class Reunion {
     raz() {
         this.status = 100;
         this.nombreJoueurs = 0;
+        this.messageParties = "En attente du resultat de la première partie...";
         this.parties.length = 0;
         this.joueurs.length = 0;
         this.labels.length = 0;
