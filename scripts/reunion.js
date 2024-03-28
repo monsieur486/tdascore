@@ -378,6 +378,10 @@ function verifDifference(bouts, points) {
     let difference = points - minimum;
     let surplus = Math.abs(difference);
 
+    if(difference<0){
+        surplus -= 0.5;
+    }
+
     let arrondi = 0;
     if (surplus >= 5 && surplus < 14.5) {
         arrondi = 10;
