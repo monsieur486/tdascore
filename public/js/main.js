@@ -30,8 +30,8 @@ const myChart = new Chart(document.getElementById('myChart').getContext('2d'), {
 const tableauParties = document.getElementById("tableauParties");
 const tableJoueurs = document.getElementById("tableJoueurs");
 
-const widthImage = 40;
-const heightImage = 40;
+const widthImage = 60;
+const heightImage = 60;
 
 let isAuthtificated = false;
 let status = 0;
