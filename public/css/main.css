@@ -39,6 +39,12 @@ body {
     margin-right: 20px;
 }
 
+#ctrlz {
+    position: absolute;
+    bottom: 80px;
+    margin-right: 20px;
+}
+
 #tableJoueurs {
     font-size: large;
 }

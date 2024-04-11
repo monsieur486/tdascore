@@ -60,6 +60,20 @@ class Reunion {
         return contrats.find(contrat => contrat.id === id);
     }
 
+    ctrlz() {
+        if(this.parties.length>=1){
+            console.log("suppression partie");
+            this.parties.splice(-1);
+            this.dataSetDan.splice(-1);
+            this.dataSetEtienne.splice(-1);
+            this.dataSetJp.splice(-1);
+            this.dataSetLaurent.splice(-1);
+            this.dataSetGuest.splice(-1);
+            this.getMessagesParties();
+            this.debugReunion();
+        }
+    }
+
     getMessagesParties() {
         let message = "";
         let belge = 0;

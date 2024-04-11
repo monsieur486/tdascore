@@ -21,6 +21,7 @@ const pab5 = document.getElementById("pab5");
 const valider = document.getElementById("valider");
 const raz = document.getElementById("raz");
 const fin = document.getElementById("fin");
+const ctrlz = document.getElementById("ctrlz");
 const erreurSrv = document.getElementById("erreurSrv");
 const attente = document.getElementById("attente");
 const joueursTab = document.getElementById("joueursTab");
@@ -70,6 +71,7 @@ function renderPage() {
             initGame.style.display = 'none';
             raz.style.display = 'none';
             fin.style.display = 'none';
+            ctrlz.style.display = 'none';
         }
         if (status === 100) {
             scoreGame.style.display = 'none';
@@ -88,6 +90,12 @@ function renderPage() {
             raz.style.display = 'inline';
             fin.style.display = 'none';
             scoreGame.style.display = 'inline';
+        }
+
+        if(parties.length >= 1) {
+            ctrlz.style.display = 'inline';
+        } else {
+            ctrlz.style.display = 'none';
         }
 
         if (nombreJoueurs === 4) {
@@ -335,6 +343,12 @@ function razPartie() {
 }
 
 raz.addEventListener("click", razPartie);
+
+function ctrlzPartie() {
+    socket.emit("ctrlz");
+}
+
+ctrlz.addEventListener("click", ctrlzPartie);
 
 function changeAttaque() {
     attaquePts = attaque.value;

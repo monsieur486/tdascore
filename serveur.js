@@ -42,6 +42,12 @@ io.on('connection', (socket) => {
         io.emit("ping", reunion);
     });
 
+    socket.on('ctrlz', () => {
+        console.log("CTRL-Z");
+        reunion.ctrlz();
+        io.emit("ping", reunion);
+    });
+
     socket.on('password', (password) => {
         if (password === gamePwd) {
             socket.emit("password");
