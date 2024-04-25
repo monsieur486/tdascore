@@ -92,12 +92,6 @@ function renderPage() {
             scoreGame.style.display = 'inline';
         }
 
-        if(parties.length >= 1) {
-            ctrlz.style.display = 'inline';
-        } else {
-            ctrlz.style.display = 'none';
-        }
-
         if (nombreJoueurs === 4) {
             preneur4.style.display = 'inline';
             preneur5.style.display = 'none';
