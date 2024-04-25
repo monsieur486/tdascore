@@ -399,7 +399,29 @@ function validerPartie() {
     let chelemVal = chelem.checked;
 
     if (contrat.value >= 1) {
-        socket.emit("valider", nombreJoueurs, contratVal, preneurVal, appelVal, boutVal, attaqueVal, chelemVal, pabVal);
+        let message = "Valider la partie avec les informations suivantes: \n";
+        message += "Contrat: " + contrat.textContent + "\n";
+        if (nombreJoueurs === 5) {
+            message += "Preneur: " + preneur5.textContent + "\n";
+            message += "Appel: " + appel.textContent + "\n";
+        } else {
+            message += "Preneur: " + preneur4.textContent + "\n";
+        }
+        message += "Bout: " + bout.textContent + "\n";
+        message += "Attaque: " + attaqueVal + "\n";
+
+        if (chelemVal) {
+            message += "Chelem !!!  \n";
+        }
+
+        if (nombreJoueurs === 5) {
+            message += "Petit au bout: " + pab5 + "\n";
+        } else {
+            message += "Petit au bout: " + pab4 + "\n";
+        }
+        if(confirm(message)) {
+            socket.emit("valider", nombreJoueurs, contratVal, preneurVal, appelVal, boutVal, attaqueVal, chelemVal, pabVal);
+        }
     }
 
     reinitialiseform();
