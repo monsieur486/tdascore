@@ -393,33 +393,7 @@ function validerPartie() {
     let chelemVal = chelem.checked;
 
     if (contrat.value >= 1) {
-        let message = "Valider la partie avec les informations suivantes: \n";
-        message += "Contrat: " + contrat.innerText + "\n";
-
-        if(contrat.value === 1) {
-            message += "Belge \n";
-        } else {
-            if (nombreJoueurs === 5) {
-                message += "Preneur: " + preneur5.innerText + "\n";
-                message += "Appel: " + appel.innerText + "\n";
-            } else {
-                message += "Preneur: " + preneur4.innerText + "\n";
-            }
-            message += "Bout: " + boutVal + "\n";
-            message += "Attaque: " + attaqueVal + "\n";
-
-            if (chelemVal) {
-                message += "Chelem !!!  \n";
-            }
-
-            if(pabVal >= 1) {
-                if (nombreJoueurs === 5) {
-                    message += "Petit au bout: " + pab5.innerText + "\n";
-                } else {
-                    message += "Petit au bout: " + pab4.innerText + "\n";
-                }
-            }
-        }
+        let message = "Valider la partie ? \n";
 
         if(confirm(message)) {
             socket.emit("valider", nombreJoueurs, contratVal, preneurVal, appelVal, boutVal, attaqueVal, chelemVal, pabVal);
