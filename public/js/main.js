@@ -333,22 +333,20 @@ function startPartie5() {
 partie5.addEventListener("click", startPartie5);
 
 function finPartie() {
-    socket.emit("fin");
+    if (confirm("Voulez-vous vraiment terminer la partie ?")) {
+        socket.emit("fin");
+    }
 }
 
 fin.addEventListener("click", finPartie);
 
 function razPartie() {
-    socket.emit("raz");
+    if (confirm("Voulez-vous vraiment remettre la partie à zéro ?")) {
+        socket.emit("raz");
+    }
 }
 
 raz.addEventListener("click", razPartie);
-
-function ctrlzPartie() {
-    socket.emit("ctrlz");
-}
-
-ctrlz.addEventListener("click", ctrlzPartie);
 
 function changeAttaque() {
     attaquePts = attaque.value;
