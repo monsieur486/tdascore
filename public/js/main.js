@@ -395,24 +395,29 @@ function validerPartie() {
     if (contrat.value >= 1) {
         let message = "Valider la partie avec les informations suivantes: \n";
         message += "Contrat: " + contrat.innerText + "\n";
-        if (nombreJoueurs === 5) {
-            message += "Preneur: " + preneur5.innerText + "\n";
-            message += "Appel: " + appel.innerText + "\n";
+
+        if(contrat.value === 1) {
+            message += "Belge \n";
         } else {
-            message += "Preneur: " + preneur4.innerText + "\n";
-        }
-        message += "Bout: " + boutVal + "\n";
-        message += "Attaque: " + attaqueVal + "\n";
-
-        if (chelemVal) {
-            message += "Chelem !!!  \n";
-        }
-
-        if(pabVal >= 1) {
             if (nombreJoueurs === 5) {
-                message += "Petit au bout: " + pab5.innerText + "\n";
+                message += "Preneur: " + preneur5.innerText + "\n";
+                message += "Appel: " + appel.innerText + "\n";
             } else {
-                message += "Petit au bout: " + pab4.innerText + "\n";
+                message += "Preneur: " + preneur4.innerText + "\n";
+            }
+            message += "Bout: " + boutVal + "\n";
+            message += "Attaque: " + attaqueVal + "\n";
+
+            if (chelemVal) {
+                message += "Chelem !!!  \n";
+            }
+
+            if(pabVal >= 1) {
+                if (nombreJoueurs === 5) {
+                    message += "Petit au bout: " + pab5.innerText + "\n";
+                } else {
+                    message += "Petit au bout: " + pab4.innerText + "\n";
+                }
             }
         }
 
